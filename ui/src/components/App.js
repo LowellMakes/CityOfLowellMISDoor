@@ -13,6 +13,9 @@ import {Config} from './Config'
 
 let socket = io(`http://localhost:8000`);
 
+var globalStyle = {
+  color: Config.textColor
+}
 var boxLeft = {
   flexGrow: 0,
   flexBasis: '50%',
@@ -71,7 +74,7 @@ export default class App extends Component {
   getSignUnlocked(){
     if(this.state.switchState == 0){
       if(Config.showWeather){
-        return (<Forecast latitude={42.6334} longitude={71.3162} name='Lowell' />);
+        return (<Forecast latitude={42.6334} longitude={-71.3162} name='Lowell' color={Config.textColor}/>);
       } else {
         return (<div></div>);
       }
@@ -86,7 +89,7 @@ export default class App extends Component {
       return (<div style={lockedStyle}><span style={medTextStyle}>{Config.lockedText}</span></div>);
     } else {
       if(Config.showWeather){
-        return (<Forecast latitude={42.6334} longitude={71.3162} name='Lowell' />);
+        return (<Forecast latitude={42.6334} longitude={-71.3162} name='Lowell' color={Config.textColor}/>);
       } else {
         return (<div></div>);
       }
@@ -95,7 +98,7 @@ export default class App extends Component {
 
   render () {
     return (
-      <div>
+      <div style={globalStyle}>
         <Row>
           <div style={boxLeft}><center><img src="./Lowell_City_Seal.jpg" /></center></div>
           <div style={boxRight}>

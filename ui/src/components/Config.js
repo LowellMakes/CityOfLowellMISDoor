@@ -8,7 +8,8 @@ var Config = {
   smallTextSize: '5vw',
   medTextSize: '10vw',
   largeTextSize: '15vw',
-  showWeather: true
+  showWeather: true,
+  textColor: '#262626'
 };
 
 export {
