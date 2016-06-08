@@ -12,6 +12,5 @@ var Config = {
   textColor: '#262626'
 };
 
-export {
-  Config
-}
+module.exports = Config;
+

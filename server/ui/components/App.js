@@ -1,14 +1,13 @@
 // Dependencies
 
-import React, { Component } from 'react'
-import io from 'socket.io-client'
+var React = require('react');
+var io = require('socket.io-client')
 
 // Components
 
-import { Center,Col,Row } from 'components/Flex'
-import Forecast from 'react-forecast'
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-import {Config} from './Config'
+var Forecast = require('react-forecast');
+var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
+var Config = require('./Config');
 // Connect to server
 
 let socket = io(`http://localhost:8000`);
@@ -48,6 +47,11 @@ var lockedStyle = {
   textAlign: 'center',
 };
 
+var rowStyle = {
+  display: 'flex',
+  justifyContent: 'spaceBetween',
+}
+
 var smallTextStyle = {
   fontSize: Config.smallTextSize  
 }
@@ -60,18 +64,19 @@ var largeTextStyle = {
   fontSize: Config.largeTextSize 
 }
 
+var App = React.createClass({
+  getInitialState: function(){
+    return {switchState: 0};
+  },
 
-export default class App extends Component {
-  constructor (props) {
-    super(props);
-    this.state = {switchState: 0};
+  componentDidMount: function(){
     socket.on('switch', data => {
       this.setState({switchState: data.state});
       console.log(data);
     });
-  }
+  },
 
-  getSignUnlocked(){
+  getSignUnlocked: function(){
     if(this.state.switchState == 0){
       if(Config.showWeather){
         return (<Forecast latitude={42.6334} longitude={-71.3162} name='Lowell' color={Config.textColor}/>);
@@ -82,9 +87,9 @@ export default class App extends Component {
       return (<div style={unlockedStyle}><span style={medTextStyle}>{Config.unlockedText}</span></div>);
     }
     
-  }
+  },
 
-  getSignLocked(){
+  getSignLocked: function(){
     if(this.state.switchState == 0){
       return (<div style={lockedStyle}><span style={medTextStyle}>{Config.lockedText}</span></div>);
     } else {
@@ -94,12 +99,12 @@ export default class App extends Component {
         return (<div></div>);
       }
     }
-  }
+  },
 
-  render () {
+  render: function() {
     return (
       <div style={globalStyle}>
-        <Row>
+        <div style={rowStyle}>
           <div style={boxLeft}><center><img src="./Lowell_City_Seal.jpg" /></center></div>
           <div style={boxRight}>
             <center>
@@ -108,9 +113,9 @@ export default class App extends Component {
               <span style={smallTextStyle}>Department</span>
             </center>
           </div>
-        </Row>
+        </div>
 
-        <Row>
+        <div style={rowStyle}>
           <div style={boxLeft}>
             <ReactCSSTransitionGroup transitionName="unlocklock" transitionAppear={true} transitionAppearTimeout={1000} transitionEnterTimeout={1000} transitionLeaveTimeout={1000}>
               {this.getSignUnlocked()}
@@ -121,8 +126,10 @@ export default class App extends Component {
               {this.getSignLocked()}
             </ReactCSSTransitionGroup>
           </div>
-        </Row>
+        </div>
       </div>
     );
   }
-}
+});
+
+module.exports = App
