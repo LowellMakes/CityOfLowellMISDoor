@@ -10,7 +10,7 @@ var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 var Config = require('./Config');
 // Connect to server
 
-let socket = io(`http://localhost:8000`);
+let socket = io();
 
 var globalStyle = {
   color: Config.textColor
