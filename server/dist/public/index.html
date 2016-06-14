@@ -1,0 +1,48 @@
+<html>
+  <head>
+    <title>City of Lowell - MIS</title>
+    <style>
+      html, body, #root {
+        background-color: #FFFFFF;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        font-family: 'Helvetica', sans-serif;
+      }
+      * {
+        box-sizing: border-box;
+      }
+
+      .unlocklock-appear {
+        opacity: 0.01;
+      }
+
+      .unlocklock-appear.example-appear-active {
+        opacity: 1;
+        transition: opacity 1s ease-in;
+      } 
+      .unlocklock-enter {
+        opacity: 0.01;
+      }
+
+      .unlocklock-enter.unlocklock-enter-active {
+        opacity: 1;
+        transition: opacity 1s ease-in;
+      }
+
+      .unlocklock-leave {
+        opacity: 1;
+      }
+
+      .unlocklock-leave.unlocklock-leave-active {
+        opacity: 0.01;
+        transition: opacity 1s ease-in;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root">
+    </div>
+    <script src="/main.js"></script>
+  </body>
+</html>

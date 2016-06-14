@@ -1,11 +1,12 @@
 {
-  "name": "socket-server",
+  "name": "city-of-lowell-mis-door",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "server.js",
   "scripts": {
     "start": "nodemon --exec babel-node server.js",
-    "build": "gulp"
+    "build": "gulp && babel dev_server.js -d server.js --preset es2015,stage-2 && cp -r public/ dist/",
+    "serve": "node dist/server.js"
   },
   "dependencies": {
     "chalk": "^1.1.1",
