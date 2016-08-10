@@ -11,6 +11,8 @@ let app = express()
 let http = Server(app)
 let io = socketIO(http)
 
+let SWITCH_READ_INTERVAL = 5000; //in ms
+
 var ServerConfig = {
   devModeNotPi: false,
   testing: false,
@@ -64,6 +66,21 @@ if (!ServerConfig.devModeNotPi) {
       }
     }
   });
+
+  setInterval( function() {
+    Switch.read(function(err,value){  
+      if(err){
+        console.log(err);
+      } else {
+        if(value == 0){
+          io.emit('switch', {'state': 0});
+        } else {
+          io.emit('switch', {'state': 1});
+        }
+      }
+    });
+  }, SWITCH_READ_INTERVAL);  
+
 }
 
 process.on('SIGINT', function(){
