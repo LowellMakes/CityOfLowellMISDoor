@@ -68,7 +68,7 @@ if (!ServerConfig.devModeNotPi) {
   });
 
   setInterval( function() {
-    Switch.read(function(err,value){  
+    Switch.readSync(function(err,value){  
       if(err){
         console.log(err);
       } else {
